@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,8 +10,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final materialTheme = MaterialTheme(Theme.of(context).textTheme);
     return MaterialApp(
-      home: Scaffold(appBar: AppBar(), body: Text("Yaay")),
+      title: 'Responsive Flutter Login Page',
+      theme: materialTheme.dark(),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Responsive Login Page")),
+      body: Center(child: Text("Welcome!")),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
