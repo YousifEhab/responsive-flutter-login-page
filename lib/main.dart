@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'theme.dart';
+import 'themes/theme.dart';
+import 'pages/login_page.dart';
+import 'pages/signup_page.dart';
+import 'pages/home_page.dart';
+import 'pages/forgot_password.dart';
+import 'pages/reset_password.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,25 +15,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final materialTheme = MaterialTheme(Theme.of(context).textTheme);
     return MaterialApp(
-      title: 'Responsive Flutter Login Page',
-      theme: materialTheme.dark(),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Responsive Login Page")),
-      body: Center(child: Text("Welcome!")),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
+      debugShowCheckedModeBanner: false,
+      theme: materialTheme.light(),
+      initialRoute: '/login',
+      routes: {
+        '/forgotPassword': (context) => ForgotPassword(),
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+        '/home': (context) => HomePage(),
+        '/resetPassword': (context) => ResetPassword(),
+      },
     );
   }
 }
