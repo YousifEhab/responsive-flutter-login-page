@@ -14,103 +14,132 @@ class LoginPage extends StatelessWidget {
           return Row(
             children: [
               Expanded(
-                flex: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: constraints.maxHeight * 0.05),
-                          Logo(),
-                          SizedBox(height: constraints.maxHeight * 0.05),
-                          const Text(
-                            "Sign in",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: constraints.maxHeight * 0.05),
-                          TextField(
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.person),
-                              labelText: "Username",
-                              border: OutlineInputBorder(
-                                // borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: constraints.maxHeight * 0.025),
-                          TextField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
-                              labelText: "Password",
-                              border: OutlineInputBorder(
-                                // borderRadius: BorderRadius.circular(25),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: constraints.maxHeight * 0.025),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/forgotPassword',
-                                  );
-                                },
-                                child: const Text("Forgot your password?"),
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Theme.of(
-                                    context,
-                                  ).colorScheme.onPrimary,
-                                  foregroundColor: Theme.of(
-                                    context,
-                                  ).colorScheme.primary,
-                                ),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/home');
-                                },
-                                child: const Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("LOGIN"),
-                                    SizedBox(width: 8),
-                                    Icon(Icons.arrow_forward),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: constraints.maxHeight * 0.05),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(
-                                context,
-                              ).colorScheme.primary,
-                              foregroundColor: Theme.of(
-                                context,
-                              ).colorScheme.onPrimary,
-                            ),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/signup');
-                            },
-                            child: const Text("CREATE NEW ACCOUNT"),
-                          ),
-                        ],
+                flex: 1,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final showRowAsColumn = constraints.maxWidth < 310;
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: constraints.maxWidth * 0.05,
+                        vertical: constraints.maxHeight * 0.05,
                       ),
-                    ),
-                  ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: constraints.maxHeight * 0.05),
+                            Logo(),
+                            SizedBox(height: constraints.maxHeight * 0.05),
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: const Text(
+                                "Sign in",
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: constraints.maxHeight * 0.05),
+                            TextField(
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.person),
+                                labelText: "Username",
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            SizedBox(height: constraints.maxHeight * 0.025),
+                            TextField(
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.lock),
+                                labelText: "Password",
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            SizedBox(height: constraints.maxHeight * 0.025),
+                            if (showRowAsColumn)
+                              Column(
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/forgotPassword',
+                                      );
+                                    },
+                                    child: const Text("Forgot your password?"),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, '/home');
+                                      },
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text("LOGIN"),
+                                          Icon(Icons.arrow_forward),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            else
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/forgotPassword',
+                                      );
+                                    },
+                                    child: const Text("Forgot your password?"),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, '/home');
+                                    },
+                                    child: const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("LOGIN"),
+                                        Icon(Icons.arrow_forward),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            SizedBox(height: constraints.maxHeight * 0.05),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.primary,
+                                foregroundColor: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimary,
+                              ),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/signup');
+                              },
+                              child: const Text("CREATE NEW ACCOUNT"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
               if (showRightPanel) Expanded(flex: 1, child: RightPanel()),
